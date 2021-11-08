@@ -46,6 +46,7 @@ int _printf(const char *format, ...)
 				format++;
 				break;
 			case 'd':
+			case 'i':
 				i = va_arg(args, int);
 				if (i < 0)
 				{
