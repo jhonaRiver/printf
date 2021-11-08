@@ -25,12 +25,14 @@ int _printf(const char *format, ...)
 		{
 			case 'c':
 				_putchar(va_arg(args, int));
+				format++;
 				count++;
 				break;
 			case 's':
 				while (*format != '\0')
 				{
 					_putchar(va_arg(args, int));
+					format++;
 					count++;
 				}
 				break;
