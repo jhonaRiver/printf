@@ -8,6 +8,7 @@
 int _printf(const char *format, ...)
 {
 	int count = 0;
+	char *s;
 	va_list args;
 
 	va_start(args, format);
@@ -29,14 +30,20 @@ int _printf(const char *format, ...)
 				count++;
 				break;
 			case 's':
-				while (*format != '\0')
+				s = va_arg(args, char *);
+				while (*s != '\0')
 				{
-					_putchar(va_arg(args, int));
-					format++;
+					_putchar(*s);
+					s++;
 					count++;
 				}
 				break;
+			case '%':
+				_putchar('%');
+				format++;
+				count++;
 		}
 	}
+	va_end(args);
 	return (count);
 }
