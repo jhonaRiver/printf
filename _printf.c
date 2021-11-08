@@ -40,7 +40,13 @@ int _printf(const char *format, ...)
 				format++;
 				break;
 			case '%':
-				_putchar('%');
+				_putchar(*format);
+				format++;
+				count++;
+				break;
+			default:
+				format--;
+				_putchar(*format);
 				format++;
 				count++;
 		}
