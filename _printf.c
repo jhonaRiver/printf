@@ -8,8 +8,6 @@
 int _printf(const char *format, ...)
 {
 	int count = 0;
-	int i;
-	char *s;
 	va_list args;
 
 	va_start(args, format);
@@ -23,52 +21,28 @@ int _printf(const char *format, ...)
 		}
 		format++;
 		while (*format == ' ')
-		{
 			format++;
-		}
 		switch (*format)
 		{
 			case 'c':
 				count += _putchar(va_arg(args, int));
-				format++;
 				break;
 			case 's':
-				s = va_arg(args, char *);
-				while (*s != '\0')
-				{
-					count += _putchar(*s);
-					s++;
-				}
-				format++;
+				count += _puts(va_arg(args, char *));
 				break;
 			case '%':
 				count += _putchar(*format);
-				format++;
 				break;
 			case 'd':
 			case 'i':
-				i = va_arg(args, int);
-				if (i < 0)
-				{
-					i = -i;
-					_putchar('-');
-				}
-				s = convert(i, 10);
-				while (*s != '\0')
-				{
-					count += _putchar(*s);
-					s++;
-				}
-				format++;
+				count += _putnum(va_arg(args, int));
 				break;
 			default:
 				while (*format != '%')
-				{
 					format--;
-				}
 				count += _putchar(*format);
-				format++;
 		}
+		format++;
 	}
 	va_end(args);
 	return (count);
@@ -82,15 +56,56 @@ int _printf(const char *format, ...)
  */
 char *convert(int num, int base)
 {
-	static char Representation[] = "0123456789ABCDEF";
+	static const char Representation[] = "0123456789ABCDEF";
 	static char buffer[50];
 	char *ptr;
 
 	ptr = &buffer[49];
 	*ptr = '\0';
 	do {
-		*--ptr = Representation[num%base];
+		*--ptr = Representation[num % base];
 		num /= base;
-	}while (num != 0);
+	} while (num != 0);
 	return (ptr);
+}
+
+/**
+ * _puts - prints string
+ * @s: string to be printed
+ * Return: number of characters printed
+ */
+int _puts(char *s)
+{
+	int count = 0;
+
+	while (*s != '\0')
+	{
+		count += _putchar(*s);
+		s++;
+	}
+	return (count);
+}
+
+/**
+ * _putnum - prints number
+ * @num: number to be printed
+ * Return: number of characters printed
+ */
+int _putnum(int num)
+{
+	int count = 0;
+	char *s;
+
+	if (num < 0)
+	{
+		num = -num;
+		_putchar('-');
+	}
+	s = convert(num, 10);
+	while (*s != '\0')
+	{
+		count += _putchar(*s);
+		s++;
+	}
+	return (count);
 }
