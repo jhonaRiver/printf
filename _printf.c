@@ -43,6 +43,7 @@ int _printf(const char *format, ...)
 				count += _putchar(*format);
 		}
 		format++;
+
 	}
 	va_end(args);
 	return (count);
@@ -99,7 +100,7 @@ int _putnum(int num)
 	if (num < 0)
 	{
 		num = -num;
-		_putchar('-');
+		count += _putchar('-');
 	}
 	s = convert(num, 10);
 	while (*s != '\0')
