@@ -8,8 +8,6 @@
 int _printf(const char *format, ...)
 {
 	int count = 0;
-	/*unsigned int i;*/
-	char *s;
 	va_list args;
 
 	va_start(args, format);
@@ -23,44 +21,29 @@ int _printf(const char *format, ...)
 		}
 		format++;
 		while (*format == ' ')
-		{
 			format++;
-		}
 		switch (*format)
 		{
 			case 'c':
 				count += _putchar(va_arg(args, int));
-				format++;
 				break;
 			case 's':
-				s = va_arg(args, char *);
-				while (*s != '\0')
-				{
-					count += _putchar(*s);
-					s++;
-				}
-				format++;
+				count += _puts(va_arg(args, char *));
 				break;
 			case '%':
 				count += _putchar(*format);
-				format++;
 				break;
-			/*case 'd':
-				i = va_arg(args, int);
-				if (i < 0)
-				{
-					i = -i;
-					count += _putchar('-');
-				}
-				_puts(convert(i, 10));
-				break;
+			case 'd':
 			case 'i':
-				break;*/
+				count += _putnum(va_arg(args, int));
+				break;
 			default:
-				format--;
+				while (*format != '%')
+					format--;
 				count += _putchar(*format);
-				format++;
 		}
+		format++;
+
 	}
 	va_end(args);
 	return (count);
@@ -68,43 +51,74 @@ int _printf(const char *format, ...)
 
 /**
  * convert - converts number to base
- * @num: number to be converted
- * @base: base to be converted to
- * Return: pointer to the converted number
+ * @num: number to convert
+ * @base: base to convert to
+ * Return: pointer to converted number
  */
-/*char *convert(unsigned int num, int base)
+char *convert(int num, int base)
 {
-    static char buff[33];
-    char *ptr;
+	static const char Representation[] = "0123456789ABCDEF";
+	static char buffer[50];
+	char *ptr;
 
-    ptr = &buff[sizeof(buff) - 1];
-    *ptr = '\0';
-
-    do
-    {
-        *--ptr = "0123456789abcdef"[num % base];
-        num /= base;
-    }
-    while (num != 0);
-
-    return(ptr);
-}*/
+	ptr = &buffer[49];
+	*ptr = '\0';
+	do {
+		*--ptr = Representation[num % base];
+		num /= base;
+	} while (num != 0);
+	return (ptr);
+}
 
 /**
- * _puts - print strings
+ * _puts - prints string
  * @s: string to be printed
  * Return: number of characters printed
  */
-/*int _puts(const char *s)
+int _puts(char *s)
 {
-	int i = 0;
+	int count = 0;
 
-	while (s[i])
+	while (*s != '\0')
 	{
-		if (s[i] != NULL)
-		{
-			_putchar(s[i]);
-		}
-		i++;
-    return (i);
-}*/
+		count += _putchar(*s);
+		s++;
+	}
+	return (count);
+}
+
+/**
+ * _putnum - prints number
+ * @num: number to be printed
+ * Return: number of characters printed
+ */
+int _putnum(int num)
+{
+	int count = 0;
+	char *s;
+
+	if (num < 0)
+	{
+		num = -num;
+		count += _putchar('-');
+	}
+	s = convert(num, 10);
+	while (*s != '\0')
+	{
+		count += _putchar(*s);
+		s++;
+	}
+	return (count);
+}
+
+/**
+* _putchar - writes the character c to stdout
+* @c: The character to print
+*
+* Return: On success 1.
+* On error, -1 is returned, and errno is set appropriately.
+*/
+int _putchar(char c)
+{
+		return (write(1, &c, 1));
+}
