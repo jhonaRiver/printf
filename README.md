@@ -30,17 +30,19 @@ Image can be found here: (https://www.cplusplus.com/reference/cstdio/printf/)
 ## FILE FUNCTIONS
 
 ### _printf.c 
-Brief explacation 
+Our printf function is stored here. This performs just as the original that prints any data given to it.
 
 ### main.h
+This a header file. It includes all prototypes functions used.
 
 ### Return values
+On succes should give the correct integer. 
 
-## FLOWCHART
+Return (0);
 
 ## AUTHORS
--Sebastian Santiago - 3615@holbertonschool.com
--Jhonatan Rivera - 3643@holbertonschool.com
+### Sebastian Santiago - 3615@holbertonschool.com
+### Jhonatan Rivera - 3643@holbertonschool.com
 
 
 
