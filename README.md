@@ -39,8 +39,8 @@ Brief explacation
 ## FLOWCHART
 
 ## AUTHORS
-Sebastian Santiago - 
-Jhonatan Rivera - 
+-Sebastian Santiago - 3615@holbertonschool.com
+-Jhonatan Rivera - 3643@holbertonschool.com
 
 
 
