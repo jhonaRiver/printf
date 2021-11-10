@@ -1,0 +1,48 @@
+.TH _PRINTF 3 2021-11-09 GNU
+
+.SH NAME
+_printf
+
+.SH SYNOPSIS
+.B PROTOTYPE
+int _printf(const char *format, ...);
+
+.SH DESCRIPTION
+.B _printf()
+In C programming language, printf() function is used to print the (“character, string, float, integer, octal and hexadecimal values”) onto the output screen.
+We use printf() function with %d format specifier to display the value of an integer variable.
+
+.SH SPECIFIERS
+.TP
+.BR \-i "," \-d
+"i" prints a integer. "d" prints decimal
+.TP
+.BR \-s
+Prints a string of characters
+.TP
+.BR \-c
+Prints a single character
+.TP
+.BR \-%%
+Print a single %
+
+.SH COMPILER
+$ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
+
+.SH MAIN.C
+.B FILE
+Used for making _printf run.
+
+.SH RETURN VALUE
+The function on succes should return the number of characthers the user wrote. If not then it should return a negative value.
+
+.SH BUGS
+At the moment no bugs have been found.
+
+.SH NOTES
+Our printf at the moment can print out basic stuff like numbers, characters and strings.
+
+.SH AUTHORS
+JHONATAN RIVERA - 3643@holbertonschool.com
+.TP
+SEBASTIAN SANTIAGO - 3615@holbertonschool.com
